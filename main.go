@@ -168,7 +168,7 @@ func articlesUpdateHandler(w http.ResponseWriter, r *http.Request) {
 
 			// √ 更新成功，跳转到文章详情页
 			if n, _ := rs.RowsAffected(); n > 0 {
-				showURL, _ := router.Get("articles.show").URL()
+				showURL, _ := router.Get("articles.show").URL("id", id)
 				http.Redirect(w, r, showURL.String(), http.StatusFound)
 			} else {
 				fmt.Fprint(w, "您没有做任何更改！")
