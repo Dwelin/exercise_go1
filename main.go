@@ -358,7 +358,9 @@ func forceHTMLMiddleware(next http.Handler) http.Handler {
 
 func removeTrailingSlash(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		r.URL.Path = strings.TrimSuffix(r.URL.Path, "/")
+		if r.URL.Path != "/" {
+			r.URL.Path = strings.TrimSuffix(r.URL.Path, "/")
+		}
 		next.ServeHTTP(w, r)
 	})
 }
