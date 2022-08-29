@@ -1,7 +1,7 @@
 package main
 
 import (
-	"goblog/app/middlewares"
+	"goblog/app/http/middlewares"
 	"goblog/bootstrap"
 	"goblog/config"
 	c "goblog/pkg/config"
