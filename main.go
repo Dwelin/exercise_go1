@@ -3,21 +3,23 @@ package main
 import (
 	"goblog/app/middlewares"
 	"goblog/bootstrap"
-	"goblog/pkg/logger"
+	"goblog/config"
+	c "goblog/pkg/config"
 	"net/http"
 )
 
-type Result interface {
-	LastInsertId() (int64, error) // 使用 INSERT 向数据插入记录，数据表有自增 id 时，该函数有返回值
-	RowsAffected() (int64, error) // 表示影响的数据表行数
+func init() {
+	// 初始化配置信息
+	config.Initialize()
 }
 
 func main() {
 
+	// 初始化 SQL
 	bootstrap.SetupDB()
 
+	// 初始化路由绑定
 	router := bootstrap.SetupRoute()
 
-	err := http.ListenAndServe(":3000", middlewares.RemoveTrailingSlash(router))
-	logger.LogError(err)
+	http.ListenAndServe(":"+c.GetString("app.port"), middlewares.RemoveTrailingSlash(router))
 }
