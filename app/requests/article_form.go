@@ -11,7 +11,7 @@ func ValidateArticleForm(data article.Article) map[string][]string {
 	// 1. 定制认证规则
 	rules := govalidator.MapData{
 		"title": []string{"required", "min_cn:3", "max_cn:40"},
-		"body":  []string{"required", "min_cn:30"},
+		"body":  []string{"required", "min_cn:10"},
 	}
 
 	// 2. 定制错误消息

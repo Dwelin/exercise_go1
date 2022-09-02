@@ -1,4 +1,17 @@
 {{define "form-fields"}}
+
+<div class="form-group mt-3">
+  <label for="category">分类 </label>
+  {{ if .Categories }}
+  <select class="form-control" name="category_id">
+    {{ range $key, $category := .Categories }}
+    <option value="{{ $category.ID }}" {{if eq $category.ID $.Article.CategoryID }} selected {{end}}>{{ $category.Name
+      }} </option>
+    {{ end }}
+  </select>
+  {{ end }}
+</div>
+
 <div class="form-group mt-3">
   <label for="title">标题</label>
   <input type="text" class="form-control {{if .Errors.title }}is-invalid {{end}}" name="title"
